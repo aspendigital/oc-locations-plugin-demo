@@ -1,0 +1,61 @@
+title = "Locations Pro Demo"
+url = "/"
+layout = "default"
+is_hidden = 0
+
+[placeLocator]
+
+[placeLocator placeLocator2]
+
+[placeLocator placeLocator3]
+==
+<?php
+function onStart()
+{
+    $this['placeCount'] = AspenDigital\Locations\Models\Place::count();
+}
+?>
+==
+<div class="container">
+
+    <h1>Locations Pro Demo</h1>
+
+    <p>These examples pull from a database of {{ placeCount | number_format }} places. These are randomly generated and assigned to tags so you can see how the plugin handles non-trivial lists and page sizes.</p>
+
+    <p>The default UI is compatible with the October demo theme (which this site also uses) and allows a visitor to decide how they want to interact with the place list, pulling results either:</p>
+
+    <ul>
+        <li>within a given distance from their current location</li>
+        <li>within a given distance from a full or partial address query</li>
+        <li>within the map boundaries</li>
+    </ul>
+
+    <h2>Example #1</h2>
+
+    <p>This component sets the initial mode to show results within the map boundaries and uses the default markup which allows a visitor to change to either of the other search modes.</p>
+
+    {% component 'placeLocator' mode='map' perPageOptions=[10,20,50,100,200,500] perPage=500  %}
+
+    <p>Tag: <code>{{ '{%' }} component 'placeLocator' mode='map' perPageOptions=[10,20,50,100,200,500] perPage=500  %}</code></p>
+
+    <h2>Example #2</h2>
+
+    <p>Having more than one component on a page is not a problem. This component instance overrides the default markup to remove the usual UI, and searches for results within 50 miles of Los Angeles, CA. No tags are used by this component.</p>
+
+    {% component 'placeLocator2' mode='search' distance="50 mi" query='Los Angeles, CA' tags=[] %}
+
+    <p>Tag: <code>{{ '{%' }} component 'placeLocator2' mode='search' distance="50 mi" query='Los Angeles, CA' tags=[] %}</code></p>
+
+    <h2>Example #3</h2>
+
+    <p>This component defaults to showing results in a 25-mile radius of the user's current location (you will likely have seen a permission request from your browser). It overrides the default UI to remove the mode, distance, and page size selection and disable tag display, but it leaves the search bar available.</p>
+
+    <p>This example overrides the marker icon, replacing it with a grocery store marker from the <a href="https://mapicons.mapsmarker.com/" target="_blank">Map Icons Collection</a>. It also overrides the default search area display, removing the semi-transparent fill and changing the outline color to green.</p>
+
+    <p><b>Note</b>: In a future version, functionality will be added to define custom marker icons in the back end.</p>
+
+    {% component 'placeLocator3' mode='location' distance='25 mi' tags=[] %}
+
+    <p>Tag: <code>{{ '{%' }} component 'placeLocator3' mode='location' distance='25 mi' tags=[] %}</code></p>
+
+</div>

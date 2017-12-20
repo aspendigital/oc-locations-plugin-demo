@@ -1,0 +1,9 @@
+[submodule "plugins/aspendigital/lookfeel"]
+	path = plugins/aspendigital/lookfeel
+	url = https://github.com/aspendigital/october-lookfeel.git
+[submodule "plugins/aspendigital/backend"]
+	path = plugins/aspendigital/backend
+	url = ssh://office.aspendigital.com/git/october-backend
+[submodule "plugins/rainlab/location"]
+	path = plugins/rainlab/location
+	url = https://github.com/rainlab/location-plugin.git

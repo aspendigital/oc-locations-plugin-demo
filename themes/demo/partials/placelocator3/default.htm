@@ -1,0 +1,39 @@
+{% if apiKey %}
+<div id="{{ __SELF__.id }}"
+     class="container-fluid"
+     data-control="place-locator"
+     data-request="{{ __SELF__ }}::onFetchMarkers"
+     data-request-update="'{{ __SELF__ }}::list': '#{{ __SELF__.id }}-list'"
+     data-request-marker-title="{{ __SELF__ }}::onFetchTitle"
+     data-api-key="{{ apiKey }}"
+     data-message-loading="Loading..."
+     data-message-location-error="Unable to locate"
+     data-message-locating="Locating..."
+     data-default-marker-options="{{ {'icon': 'assets/images/grocery-marker.png' | theme } | json_encode }}"
+     data-search-area-options="{{ {'strokeColor': '#008000',
+            'strokeOpacity': 0.8,
+            'strokeWeight': 2,
+            'fillOpacity': 0} | json_encode }}"
+     data-sync-data="{{ syncData | json_encode }}"
+>
+    <div class="row">
+        <div class="col-sm-9">
+            <form id="{{ __SELF__.id }}-form">
+                {% partial __SELF__ ~ '::form' %}
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-9" id="{{ __SELF__.id }}-map" style="height: {{ height }}"></div>
+
+        <div class="col-sm-3" style="height: {{ height }}; overflow: auto">
+            <div id="{{ __SELF__.id }}-list">
+                {% partial __SELF__ ~ '::list' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<span style="color: #f00">No Google Maps API Key!</span>
+{% endif %}
